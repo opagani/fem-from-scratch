@@ -1,13 +1,24 @@
-const hamburgerButton = document.querySelector('[aria-controls="primary-nav"]');
-const nav = document.querySelector(".primary-navigation");
+const navToggle = document.querySelector('[aria-controls="primary-nav"]');
+const primaryNav = document.querySelector("#primary-nav");
 
-hamburgerButton.addEventListener("click", () => {
-  // check if the navigation is opened
-  const isNavOpened = hamburgerButton.getAttribute("aria-expanded");
+navToggle.addEventListener("click", () => {
+  const navOpened = navToggle.getAttribute("aria-expanded");
 
-  if (isNavOpened === "false") {
-    hamburgerButton.setAttribute("aria-expanded", "true");
+  if (navOpened === "false") {
+    navToggle.setAttribute("aria-expanded", "true");
   } else {
-    hamburgerButton.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-expanded", "false");
   }
+
+  console.log(navOpened);
 });
+
+const resizeObserver = new ResizeObserver(() => {
+  document.body.classList.add("resizing");
+
+  requestAnimationFrame(() => {
+    document.body.classList.remove("resizing");
+  });
+});
+
+resizeObserver.observe(document.body);
